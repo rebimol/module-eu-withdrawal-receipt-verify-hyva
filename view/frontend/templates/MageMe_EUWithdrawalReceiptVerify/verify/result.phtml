@@ -1,0 +1,146 @@
+<?php
+/**
+ * Hyva theme variant of the EU Withdrawal verify page. Pure Tailwind utility
+ * classes; no LESS, no module CSS. Auto-discovered for Hyva themes via the
+ * Hyva_CompatModuleFallback registration in etc/frontend/di.xml.
+ *
+ * @var \MageMe\EUWithdrawal\Block\Withdraw\VerifyResult $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+declare(strict_types=1);
+
+$accountUrl = $block->getMyAccountUrl();
+$ok = $block->isOk();
+$r = $block->getRefund();
+$items = $block->getItems();
+?>
+<section class="mt-8 mx-auto max-w-[720px] text-gray-900" aria-labelledby="verify-title">
+    <header class="mb-7 text-center">
+        <h1 id="verify-title" class="text-[26px] font-bold leading-tight tracking-tight mb-1.5 text-gray-900">
+            <?= $escaper->escapeHtml($ok ? __('Withdrawal receipt verified') : __('Withdrawal receipt — verification failed')) ?>
+        </h1>
+        <p class="text-[13px] text-gray-500">
+            <?= $escaper->escapeHtml(__('Public integrity check — Art. 11a Directive 2011/83/EU')) ?>
+        </p>
+    </header>
+
+    <?php if ($ok): ?>
+        <div class="flex items-center gap-4 bg-slate-100 border border-slate-300 rounded-xl px-7 py-6 mb-4">
+            <div class="flex-shrink-0 w-14 h-14 rounded-full bg-emerald-600 text-white inline-flex items-center justify-center" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 8"/></svg>
+            </div>
+            <div class="flex-1 min-w-0">
+                <h2 class="text-[18px] font-bold mb-1 text-gray-900"><?= $escaper->escapeHtml(__('Receipt verified')) ?></h2>
+                <p class="text-[14px] leading-relaxed text-gray-900">
+                    <?= $escaper->escapeHtml(__('This receipt is cryptographically signed and has not been modified since it was issued by the merchant.')) ?>
+                </p>
+            </div>
+            <a href="<?= $escaper->escapeUrl($accountUrl) ?>"
+               class="flex-shrink-0 inline-flex items-center justify-center border border-slate-800 bg-white text-slate-800 hover:bg-slate-800 hover:text-white px-[18px] py-[9px] rounded-lg font-semibold text-[13px] no-underline transition-colors whitespace-nowrap">
+                <?= $escaper->escapeHtml(__('Back to my account')) ?>
+            </a>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-xl px-[26px] py-[22px] mb-4">
+            <h3 class="text-[14px] font-semibold text-gray-900 mb-3.5 pb-3 border-b border-gray-200">
+                <?= $escaper->escapeHtml(__('Receipt details')) ?>
+            </h3>
+            <dl class="grid gap-y-2 gap-x-4" style="grid-template-columns: minmax(180px, 30%) 1fr;">
+                <dt class="text-gray-500 text-[13px] m-0"><?= $escaper->escapeHtml(__('Receipt number')) ?></dt>
+                <dd class="text-gray-900 text-[13px] font-semibold m-0 text-right">RR<?= $escaper->escapeHtml($block->getIncrementIdDisplay()) ?></dd>
+
+                <?php if ($block->getOrderNumber() !== ''): ?>
+                    <dt class="text-gray-500 text-[13px] m-0"><?= $escaper->escapeHtml(__('Order number')) ?></dt>
+                    <dd class="text-gray-900 text-[13px] font-semibold m-0 text-right">#<?= $escaper->escapeHtml($block->getOrderNumber()) ?></dd>
+                <?php endif; ?>
+
+                <?php if ($block->getConfirmedAtFormatted() !== ''): ?>
+                    <dt class="text-gray-500 text-[13px] m-0"><?= $escaper->escapeHtml(__('Confirmed')) ?></dt>
+                    <dd class="text-gray-900 text-[13px] font-semibold m-0 text-right"><?= $escaper->escapeHtml($block->getConfirmedAtFormatted()) ?></dd>
+                <?php endif; ?>
+
+                <?php // Consumer name intentionally not rendered — GDPR Art. 5(1)(c) data
+                      // minimisation, matching the Stripe/Square/Shopify "tokenised receipt" pattern.
+                ?>
+
+                <dt class="text-gray-500 text-[13px] m-0"><?= $escaper->escapeHtml(__('Refund total')) ?></dt>
+                <dd class="text-gray-900 text-[15px] font-bold m-0 text-right"><?= $escaper->escapeHtml($block->formatAmount($r['total'])) ?></dd>
+
+                <?php if ($block->getMerchantName() !== ''): ?>
+                    <dt class="text-gray-500 text-[13px] m-0"><?= $escaper->escapeHtml(__('Merchant')) ?></dt>
+                    <dd class="text-gray-900 text-[13px] font-semibold m-0 text-right"><?= $escaper->escapeHtml($block->getMerchantName()) ?></dd>
+                <?php endif; ?>
+
+                <?php if ($block->getArticleRef() !== ''): ?>
+                    <dt class="text-gray-500 text-[13px] m-0"><?= $escaper->escapeHtml(__('Legal basis')) ?></dt>
+                    <dd class="text-gray-900 text-[13px] font-semibold m-0 text-right"><?= $escaper->escapeHtml($block->getArticleRef()) ?></dd>
+                <?php endif; ?>
+            </dl>
+        </div>
+
+        <?php if ($items !== []): ?>
+            <div class="bg-white border border-gray-200 rounded-xl px-[26px] py-[22px] mb-4">
+                <h3 class="text-[14px] font-semibold text-gray-900 mb-3.5 pb-3 border-b border-gray-200">
+                    <?= $escaper->escapeHtml(__('Returned items')) ?>
+                    <span class="text-gray-500 font-normal ml-1">(<?= (int) count($items) ?>)</span>
+                </h3>
+                <ul class="list-none m-0 p-0">
+                    <?php foreach ($items as $i => $item): ?>
+                        <li class="grid items-center gap-y-2 gap-x-[18px] py-2.5 text-[13px] <?= $i > 0 ? 'border-t border-gray-200' : '' ?>"
+                            style="grid-template-columns: 1fr auto auto;">
+                            <span class="text-gray-900">
+                                <strong class="font-semibold"><?= $escaper->escapeHtml(__('SKU %1', (string) ($item['sku'] ?? ''))) ?></strong>
+                            </span>
+                            <span class="text-gray-500"><?= $escaper->escapeHtml(__('Qty %1', (int) ($item['qty'] ?? 0))) ?></span>
+                            <span class="font-semibold text-gray-900"><?= $escaper->escapeHtml($block->formatAmount((string) ($item['refund_amount'] ?? '0.00'))) ?></span>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+                <div class="mt-3.5 pt-3 border-t border-gray-200 flex flex-col gap-1.5 text-[13px]">
+                    <?php if ((float) $r['shipping'] > 0): ?>
+                        <div class="flex justify-between text-gray-500">
+                            <span><?= $escaper->escapeHtml(__('Shipping refund')) ?></span>
+                            <span><?= $escaper->escapeHtml($block->formatAmount($r['shipping'])) ?></span>
+                        </div>
+                    <?php endif; ?>
+                    <?php if ((float) $r['tax'] > 0): ?>
+                        <div class="flex justify-between text-gray-500">
+                            <span><?= $escaper->escapeHtml(__('Tax refund')) ?></span>
+                            <span><?= $escaper->escapeHtml($block->formatAmount($r['tax'])) ?></span>
+                        </div>
+                    <?php endif; ?>
+                    <div class="flex justify-between mt-1 pt-2.5 border-t border-gray-200 text-[15px] font-bold text-gray-900">
+                        <span><?= $escaper->escapeHtml(__('Total refund')) ?></span>
+                        <span><?= $escaper->escapeHtml($block->formatAmount($r['total'])) ?></span>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <div class="bg-gray-50 border border-gray-200 rounded-xl px-[26px] py-[22px] mb-4">
+            <div class="flex items-center justify-between gap-3 border-b border-gray-200 mb-3.5 pb-3">
+                <h3 class="text-[14px] font-semibold text-gray-900 m-0"><?= $escaper->escapeHtml(__('Integrity hash (SHA-256)')) ?></h3>
+            </div>
+            <code class="block font-mono text-[12px] text-gray-900 leading-relaxed break-all whitespace-pre-wrap select-all"><?= $escaper->escapeHtml($block->getContentHashDisplay()) ?></code>
+            <p class="mt-3 mb-0 text-gray-500 text-[12px] leading-relaxed">
+                <?= $escaper->escapeHtml(__('Anyone holding the original receipt email can recompute this hash to confirm the receipt has not been altered. Mismatch means the receipt was modified after issuance. Click the hash to select it, then copy with Ctrl+C / ⌘+C.')) ?>
+            </p>
+        </div>
+    <?php else: ?>
+        <div class="flex items-center gap-4 bg-red-50 border border-red-200 rounded-xl px-7 py-6 mb-4">
+            <div class="flex-shrink-0 w-14 h-14 rounded-full bg-red-600 text-white inline-flex items-center justify-center" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+            </div>
+            <div class="flex-1 min-w-0">
+                <h2 class="text-[18px] font-bold mb-1 text-gray-900"><?= $escaper->escapeHtml(__('Verification failed')) ?></h2>
+                <p class="text-[14px] leading-relaxed text-gray-900">
+                    <?= $escaper->escapeHtml(__('This link does not match a valid withdrawal receipt. The link may be incorrect, the receipt may have been revoked, or the verification request was rate-limited. If you copied the link from an email, please try again in a few minutes — or contact us if the problem persists.')) ?>
+                </p>
+            </div>
+            <a href="<?= $escaper->escapeUrl($accountUrl) ?>"
+               class="flex-shrink-0 inline-flex items-center justify-center border border-slate-800 bg-white text-slate-800 hover:bg-slate-800 hover:text-white px-[18px] py-[9px] rounded-lg font-semibold text-[13px] no-underline transition-colors whitespace-nowrap">
+                <?= $escaper->escapeHtml(__('Back to my account')) ?>
+            </a>
+        </div>
+    <?php endif; ?>
+</section>
