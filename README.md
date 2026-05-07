@@ -13,7 +13,7 @@ Hyva theme compatibility for `MageMe_EUWithdrawalReceiptVerify` (Pro tier). Re-r
 
 ## Why a separate module
 
-`MageMe_EUWithdrawalReceiptVerify` (Pro) ships a Luma-styled phtml + a LESS-compiled CSS bundle for the verify page. On a Hyva theme storefront the LESS still compiles and loads, **but Hyva's design system is Tailwind utility-class first** — letting Lite/Pro LESS leak onto a Hyva page is tech debt. This companion:
+`MageMe_EUWithdrawalReceiptVerify` (Pro) ships a Luma-styled phtml + a LESS-compiled CSS bundle for the verify page. On a Hyva theme storefront the LESS still compiles and loads, **but Hyva's design system is Tailwind utility-class first** — letting base/Pro LESS leak onto a Hyva page is tech debt. This companion:
 
 1. **Removes** the Pro module's `<css src="MageMe_EUWithdrawalReceiptVerify::css/verify.css"/>` directive on Hyva theme via `<remove>` in the layout XML, so the merchant's Tailwind bundle is the only CSS source.
 2. **Overrides** the verify-page phtml with a Tailwind/Alpine variant via `Hyva_CompatModuleFallback` registration.
