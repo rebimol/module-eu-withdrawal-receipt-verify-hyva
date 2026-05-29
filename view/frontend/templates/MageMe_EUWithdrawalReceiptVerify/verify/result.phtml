@@ -45,7 +45,7 @@ $items = $block->getItems();
             <h3 class="text-[14px] font-semibold text-gray-900 mb-3.5 pb-3 border-b border-gray-200">
                 <?= $escaper->escapeHtml(__('Receipt details')) ?>
             </h3>
-            <dl class="grid gap-y-2 gap-x-4" style="grid-template-columns: minmax(180px, 30%) 1fr;">
+            <dl class="grid gap-y-2 gap-x-4 grid-cols-[minmax(180px,30%)_1fr]">
                 <dt class="text-gray-500 text-[13px] m-0"><?= $escaper->escapeHtml(__('Receipt number')) ?></dt>
                 <dd class="text-gray-900 text-[13px] font-semibold m-0 text-right">RR<?= $escaper->escapeHtml($block->getIncrementIdDisplay()) ?></dd>
 
@@ -86,8 +86,7 @@ $items = $block->getItems();
                 </h3>
                 <ul class="list-none m-0 p-0">
                     <?php foreach ($items as $i => $item): ?>
-                        <li class="grid items-center gap-y-2 gap-x-[18px] py-2.5 text-[13px] <?= $i > 0 ? 'border-t border-gray-200' : '' ?>"
-                            style="grid-template-columns: 1fr auto auto;">
+                        <li class="grid items-center gap-y-2 gap-x-[18px] py-2.5 text-[13px] grid-cols-[1fr_auto_auto] <?= $i > 0 ? 'border-t border-gray-200' : '' ?>">
                             <span class="text-gray-900">
                                 <strong class="font-semibold"><?= $escaper->escapeHtml(__('SKU %1', (string) ($item['sku'] ?? ''))) ?></strong>
                             </span>
