@@ -1,54 +1,60 @@
-# Hyva_MageMeEUWithdrawalReceiptVerify
+# MageMe EU Withdrawal — Receipt Verify, Hyva companion (Pro)
 
-**Version:** 0.1.0 (initial release)
-**Composer:** `mageme/module-eu-withdrawal-receipt-verify-hyva`
-**Requires:** `mageme/module-eu-withdrawal-receipt-verify: >=0.1.2 <1.0` (Pro tier) + `hyva-themes/magento2-theme-module: ^1.3.11`
-**Tier:** Free — Pro Receipt-Verify companion (Hyva theme compatibility)
+> Hyva theme compatibility for the public receipt verify page — pure Tailwind, no LESS, no jQuery.
 
-Hyva theme compatibility for `MageMe_EUWithdrawalReceiptVerify` (Pro tier). Re-renders the public verify page at `/withdraw-contract/verify/index/request_id/<id>/hash/<hex>/` using **pure Tailwind utility classes** — no LESS, no module-shipped CSS, no jQuery.
+[![Hyva](https://img.shields.io/badge/Hyva-1.3.11%2B-21CFD5.svg?style=flat-square)](https://www.hyva.io)
+[![PHP](https://img.shields.io/badge/PHP-8.1%20%7C%208.2%20%7C%208.3%20%7C%208.4%20%7C%208.5-777BB4.svg?style=flat-square)](https://php.net)
+[![Tier](https://img.shields.io/badge/tier-Pro-6E56CF.svg?style=flat-square)](https://mageme.com/eu-withdrawal-pro)
+[![License](https://img.shields.io/badge/license-MageMe%20EULA-blue.svg?style=flat-square)](https://mageme.com/license/)
 
-## What this module covers
+Companion to [`mageme/module-eu-withdrawal-receipt-verify`](https://mageme.com/eu-withdrawal-pro) (Pro). Re-renders the public verify page with the Hyva design system. Install it when you run **Receipt Verify (Pro) on a Hyva theme**.
 
-- **Verify page** at `/withdraw-contract/verify/index/...` — Tailwind reskin of the public integrity-check page that confirms a withdrawal receipt has not been tampered with after issuance. Same data surface as the Pro module's Luma version (receipt number, order number, confirmed-at, refund total, item lines, merchant name, integrity hash) — only the chrome differs.
+**[Documentation](https://docs.mageme.com)** · **[Get EU Withdrawal Pro](https://mageme.com/eu-withdrawal-pro)**
 
-## Why a separate module
+---
 
-`MageMe_EUWithdrawalReceiptVerify` (Pro) ships a Luma-styled phtml + a LESS-compiled CSS bundle for the verify page. On a Hyva theme storefront the LESS still compiles and loads, **but Hyva's design system is Tailwind utility-class first** — letting base/Pro LESS leak onto a Hyva page is tech debt. This companion:
+## What it does
 
-1. **Removes** the Pro module's `<css src="MageMe_EUWithdrawalReceiptVerify::css/verify.css"/>` directive on Hyva theme via `<remove>` in the layout XML, so the merchant's Tailwind bundle is the only CSS source.
-2. **Overrides** the verify-page phtml with a Tailwind/Alpine variant via `Hyva_CompatModuleFallback` registration.
-3. The new template paths get added to Hyva's Tailwind content-scan automatically (Hyva's `compat_module` mechanism walks our `view/frontend/templates/` tree).
+Re-renders the public verify page at `/withdraw-contract/verify/…` with Tailwind utility classes instead of the Pro module's LESS bundle, so it matches a Hyva storefront. Same data and the same integrity semantics — only the chrome differs. On Hyva, this avoids leaking base/Pro LESS onto a Tailwind-first storefront.
 
-The data layer (the `Block\Withdraw\VerifyResult` block) is **shared with the Pro module** — this companion only re-implements the visual layer.
+## Requirements
 
-## ⚠️ Disclaimer
+- **Receipt Verify (Pro)** module (`mageme/module-eu-withdrawal-receipt-verify`, pulled automatically)
+- `hyva-themes/magento2-theme-module` **≥ 1.3.11**
+- Magento **2.4.4–2.4.9**, **PHP 8.1–8.5**
+- A valid **EU Withdrawal Pro** licence
 
-This module is provided **AS-IS, WITHOUT WARRANTY OF ANY KIND**. It is a technical theme-compatibility shim for `MageMe_EUWithdrawalReceiptVerify` (Pro). It re-implements the same verify-page data surface in a different rendering runtime — it adds no compliance functionality and removes no compliance functionality.
+## Install
 
-Specifically, this module does not change:
-
-- The cryptographic hash algorithm (SHA-256) or content canonicalisation
-- The 6-year retention period or the rate-limit policy on the public endpoint
-- The integrity-check semantics — the verify page still proves receipt-was-not-modified-since-issuance, exactly as the Pro module does on Luma
-
-See the parent module's [README disclaimer](../../MageMe/EUWithdrawalReceiptVerify/README.md) for the full disclaimer.
-
-## Installation
+Pro modules are distributed through the private MageMe Composer repository. Add it once with the credentials from your purchase, then require the package:
 
 ```bash
+composer config repositories.mageme composer https://repo.mageme.com
 composer require mageme/module-eu-withdrawal-receipt-verify-hyva
 bin/magento module:enable Hyva_MageMeEUWithdrawalReceiptVerify
 bin/magento setup:upgrade
-bin/magento setup:di:compile
 bin/magento cache:flush
 ```
 
-After installing, recompile Hyva's Tailwind bundle:
+Recompile the Hyva Tailwind bundle so the classes used by this module are picked up (substitute your child theme's `web/tailwind/` path if applicable):
 
 ```bash
 cd vendor/hyva-themes/magento2-default-theme/web/tailwind
-npm install
-npm run build
+npm install && npm run build
 ```
 
-(Path differs if your Hyva theme is a child theme — substitute its `web/tailwind/` path.)
+## Support
+
+- Documentation: [docs.mageme.com](https://docs.mageme.com)
+
+## Legal disclaimer
+
+This is a **technical theme-compatibility shim** — it re-renders the verify page in Tailwind and adds or removes no compliance functionality (the hash algorithm, retention and rate-limit policy are unchanged). The merchant is responsible for verifying it renders correctly under their Hyva theme and version. See the base module's [full disclaimer](https://docs.mageme.com).
+
+## License
+
+Governed by the **MageMe End User License Agreement** ([mageme.com/license](https://mageme.com/license/)). Licensor: ACTEK d.o.o., Slovenia. Pro requires a paid commercial licence.
+
+---
+
+**MageMe** builds high-quality Magento 2 extensions focused on compliance, conversion, and B2B. → [Browse all extensions on mageme.com](https://mageme.com/extensions)
