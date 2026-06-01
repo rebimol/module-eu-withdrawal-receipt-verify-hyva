@@ -4,12 +4,12 @@
 
 [![Hyva](https://img.shields.io/badge/Hyva-1.3.11%2B-21CFD5.svg?style=flat-square)](https://www.hyva.io)
 [![PHP](https://img.shields.io/badge/PHP-8.1%20%7C%208.2%20%7C%208.3%20%7C%208.4%20%7C%208.5-777BB4.svg?style=flat-square)](https://php.net)
-[![Tier](https://img.shields.io/badge/tier-Pro-6E56CF.svg?style=flat-square)](https://mageme.com/eu-withdrawal-pro)
+[![Tier](https://img.shields.io/badge/tier-Pro-6E56CF.svg?style=flat-square)](https://mageme.com/magento-2-withdrawal-button-extension.html)
 [![License](https://img.shields.io/badge/license-MageMe%20EULA-blue.svg?style=flat-square)](https://mageme.com/license/)
 
-Companion to [`mageme/module-eu-withdrawal-receipt-verify`](https://mageme.com/eu-withdrawal-pro) (Pro). Re-renders the public verify page with the Hyva design system. Install it when you run **Receipt Verify (Pro) on a Hyva theme**.
+Companion to [`mageme/module-eu-withdrawal-receipt-verify`](https://mageme.com/magento-2-withdrawal-button-extension.html) (Pro). Re-renders the public verify page with the Hyva design system. Install it when you run **Receipt Verify (Pro) on a Hyva theme**.
 
-**[Documentation](https://docs.mageme.com)** · **[Get EU Withdrawal Pro](https://mageme.com/eu-withdrawal-pro)**
+**[Documentation](https://docs.mageme.com)** · **[Get EU Withdrawal Pro](https://mageme.com/magento-2-withdrawal-button-extension.html)**
 
 ---
 
@@ -43,6 +43,12 @@ cd vendor/hyva-themes/magento2-default-theme/web/tailwind
 npm install && npm run build
 ```
 
+## Custom Magento development
+
+Need a feature an extension doesn't cover, or a bespoke Magento build? MageMe takes on custom extension development and integration work.
+
+→ **[Custom Magento development](https://mageme.com/magento-services/custom-development)**
+
 ## Support
 
 - Documentation: [docs.mageme.com](https://docs.mageme.com)
@@ -53,8 +59,8 @@ This is a **technical theme-compatibility shim** — it re-renders the verify pa
 
 ## License
 
-Governed by the **MageMe End User License Agreement** ([mageme.com/license](https://mageme.com/license/)). Licensor: ACTEK d.o.o., Slovenia. Pro requires a paid commercial licence.
+Governed by the **MageMe End User License Agreement** ([mageme.com/license](https://mageme.com/license/)). Pro requires a paid commercial licence.
 
 ---
 
-**MageMe** builds high-quality Magento 2 extensions focused on compliance, conversion, and B2B. → [Browse all extensions on mageme.com](https://mageme.com/extensions)
+**MageMe** builds Magento 2 and Adobe Commerce extensions for B2B merchants — form building, quoting, catalog control, and EU compliance. → [Browse all extensions](https://mageme.com/extensions)
