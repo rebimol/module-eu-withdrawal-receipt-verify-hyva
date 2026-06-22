@@ -58,9 +58,9 @@ $items = $block->getItems();
                     <dd class="text-gray-900 text-[13px] font-semibold m-0 text-right">#<?= $escaper->escapeHtml($block->getOrderNumber()) ?></dd>
                 <?php endif; ?>
 
-                <?php if ($block->getConfirmedAtFormatted() !== ''): ?>
-                    <dt class="text-gray-500 text-[13px] m-0"><?= $escaper->escapeHtml(__('Confirmed')) ?></dt>
-                    <dd class="text-gray-900 text-[13px] font-semibold m-0 text-right"><?= $escaper->escapeHtml($block->getConfirmedAtFormatted()) ?></dd>
+                <?php if ($block->getCreatedAtFormatted() !== ''): ?>
+                    <dt class="text-gray-500 text-[13px] m-0"><?= $escaper->escapeHtml(__('Submitted')) ?></dt>
+                    <dd class="text-gray-900 text-[13px] font-semibold m-0 text-right"><?= $escaper->escapeHtml($block->getCreatedAtFormatted()) ?></dd>
                 <?php endif; ?>
 
                 <?php // Consumer name intentionally not rendered — GDPR Art. 5(1)(c) data
