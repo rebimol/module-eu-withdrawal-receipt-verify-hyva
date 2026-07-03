@@ -58,7 +58,7 @@ $items = $block->getItems();
                     <dd class="text-gray-900 text-[13px] font-semibold m-0 text-right">#<?= $escaper->escapeHtml($block->getOrderNumber()) ?></dd>
                 <?php endif; ?>
 
-                <?php if ($block->getCreatedAtFormatted() !== ''): ?>
+                <?php if (method_exists($block, 'getCreatedAtFormatted') && $block->getCreatedAtFormatted() !== ''): ?>
                     <dt class="text-gray-500 text-[13px] m-0"><?= $escaper->escapeHtml(__('Submitted')) ?></dt>
                     <dd class="text-gray-900 text-[13px] font-semibold m-0 text-right"><?= $escaper->escapeHtml($block->getCreatedAtFormatted()) ?></dd>
                 <?php endif; ?>
