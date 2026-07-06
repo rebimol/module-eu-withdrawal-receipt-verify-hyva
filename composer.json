@@ -1,7 +1,7 @@
 {
   "name": "mageme/module-eu-withdrawal-receipt-verify-hyva",
   "description": "Hyva theme compatibility for mageme/module-eu-withdrawal-receipt-verify. Re-renders the public verify page at /withdraw-contract/verify/index/ using pure Tailwind utilities — no LESS, no jQuery, no KnockoutJS. Drops the LESS-compiled CSS bundle on Hyva theme storefronts. NOT legal advice — see README disclaimer.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "magento2-module",
   "license": "proprietary",
   "keywords": [
