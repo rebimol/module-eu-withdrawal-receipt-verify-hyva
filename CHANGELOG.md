@@ -1,3 +1,7 @@
+## 1.0.4
+
+- Fix: On a theme still built with the previous Tailwind generation the receipt-verification page rendered unstyled, because this module's template was left out when the theme's bundle was built.
+
 ## 1.0.3
 
 * Other: The tax row on the guest receipt-verification page is now labelled "Of which VAT", matching the withdrawal form.
