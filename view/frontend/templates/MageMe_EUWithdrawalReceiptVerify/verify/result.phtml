@@ -38,7 +38,7 @@ $items = $block->getItems();
             <div class="flex-1 min-w-0">
                 <h2 class="text-[18px] font-bold mb-1 text-gray-900"><?= $escaper->escapeHtml(__('Receipt verified')) ?></h2>
                 <p class="text-[14px] leading-relaxed text-gray-900">
-                    <?= $escaper->escapeHtml(__('This receipt is cryptographically signed and has not been modified since it was issued by the merchant.')) ?>
+                    <?= $escaper->escapeHtml(__('This receipt matches its SHA-256 fingerprint, which shows it has not been changed since the merchant issued it.')) ?>
                 </p>
             </div>
             <a href="<?= $escaper->escapeUrl($backUrl) ?>"
