@@ -1,3 +1,8 @@
+## 1.0.5
+
+- Fix: Returned items on the receipt verification page show the product name next to the SKU.
+- Fix: Visitors who are not signed in get a "Continue Shopping" link on the verification page instead of "Back to my account".
+
 ## 1.0.4
 
 - Fix: On a theme still built with the previous Tailwind generation the receipt-verification page rendered unstyled, because this module's template was left out when the theme's bundle was built.

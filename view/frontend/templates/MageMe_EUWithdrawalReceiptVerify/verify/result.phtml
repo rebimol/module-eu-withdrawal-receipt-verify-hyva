@@ -13,7 +13,9 @@
  */
 declare(strict_types=1);
 
-$accountUrl = $block->getMyAccountUrl();
+$loggedIn = method_exists($block, 'isCustomerLoggedIn') ? $block->isCustomerLoggedIn() : true;
+$backUrl = $loggedIn ? $block->getMyAccountUrl() : $block->getContinueShoppingUrl();
+$backLabel = $loggedIn ? __('Back to my account') : __('Continue Shopping');
 $ok = $block->isOk();
 $r = $block->getRefund();
 $items = $block->getItems();
@@ -39,9 +41,9 @@ $items = $block->getItems();
                     <?= $escaper->escapeHtml(__('This receipt is cryptographically signed and has not been modified since it was issued by the merchant.')) ?>
                 </p>
             </div>
-            <a href="<?= $escaper->escapeUrl($accountUrl) ?>"
+            <a href="<?= $escaper->escapeUrl($backUrl) ?>"
                class="flex-shrink-0 inline-flex items-center justify-center border border-slate-800 bg-white text-slate-800 hover:bg-slate-800 hover:text-white px-[18px] py-[9px] rounded-lg font-semibold text-[13px] no-underline transition-colors whitespace-nowrap">
-                <?= $escaper->escapeHtml(__('Back to my account')) ?>
+                <?= $escaper->escapeHtml($backLabel) ?>
             </a>
         </div>
 
@@ -92,7 +94,12 @@ $items = $block->getItems();
                     <?php foreach ($items as $i => $item): ?>
                         <li class="grid items-center gap-y-2 gap-x-[18px] py-2.5 text-[13px] grid-cols-[1fr_auto_auto] <?= $i > 0 ? 'border-t border-gray-200' : '' ?>">
                             <span class="text-gray-900">
-                                <strong class="font-semibold"><?= $escaper->escapeHtml(__('SKU %1', (string) ($item['sku'] ?? ''))) ?></strong>
+                                <?php if ((string) ($item['name'] ?? '') !== ''): ?>
+                                    <strong class="font-semibold"><?= $escaper->escapeHtml((string) $item['name']) ?></strong>
+                                    <span class="block text-[12px] text-gray-500"><?= $escaper->escapeHtml(__('SKU %1', (string) ($item['sku'] ?? ''))) ?></span>
+                                <?php else: ?>
+                                    <strong class="font-semibold"><?= $escaper->escapeHtml(__('SKU %1', (string) ($item['sku'] ?? ''))) ?></strong>
+                                <?php endif; ?>
                             </span>
                             <span class="text-gray-500"><?= $escaper->escapeHtml(__('Qty %1', (int) ($item['qty'] ?? 0))) ?></span>
                             <span class="font-semibold text-gray-900"><?= $escaper->escapeHtml($block->formatAmount((string) ($item['refund_amount'] ?? '0.00'))) ?></span>
@@ -140,9 +147,9 @@ $items = $block->getItems();
                     <?= $escaper->escapeHtml(__('This link does not match a valid withdrawal receipt. The link may be incorrect, the receipt may have been revoked, or the verification request was rate-limited. If you copied the link from an email, please try again in a few minutes — or contact us if the problem persists.')) ?>
                 </p>
             </div>
-            <a href="<?= $escaper->escapeUrl($accountUrl) ?>"
+            <a href="<?= $escaper->escapeUrl($backUrl) ?>"
                class="flex-shrink-0 inline-flex items-center justify-center border border-slate-800 bg-white text-slate-800 hover:bg-slate-800 hover:text-white px-[18px] py-[9px] rounded-lg font-semibold text-[13px] no-underline transition-colors whitespace-nowrap">
-                <?= $escaper->escapeHtml(__('Back to my account')) ?>
+                <?= $escaper->escapeHtml($backLabel) ?>
             </a>
         </div>
     <?php endif; ?>
