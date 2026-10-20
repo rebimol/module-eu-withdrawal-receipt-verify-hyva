@@ -133,7 +133,7 @@ $items = $block->getItems();
             </div>
             <code class="block font-mono text-[12px] text-gray-900 leading-relaxed break-all whitespace-pre-wrap select-all"><?= $escaper->escapeHtml($block->getContentHashDisplay()) ?></code>
             <p class="mt-3 mb-0 text-gray-500 text-[12px] leading-relaxed">
-                <?= $escaper->escapeHtml(__('Anyone holding the original receipt email can recompute this hash to confirm the receipt has not been altered. Mismatch means the receipt was modified after issuance. Click the hash to select it, then copy with Ctrl+C / ⌘+C.')) ?>
+                <?= $escaper->escapeHtml(__('The store keeps this hash with the receipt and compares it with the content of the receipt during this check. A mismatch would mean the receipt was changed after it was issued. Click the hash to select it, then copy with Ctrl+C / ⌘+C.')) ?>
             </p>
         </div>
     <?php else: ?>
