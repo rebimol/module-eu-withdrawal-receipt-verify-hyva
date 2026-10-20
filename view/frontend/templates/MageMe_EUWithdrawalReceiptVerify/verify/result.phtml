@@ -92,7 +92,7 @@ $items = $block->getItems();
                 </h3>
                 <ul class="list-none m-0 p-0">
                     <?php foreach ($items as $i => $item): ?>
-                        <li class="grid items-center gap-y-2 gap-x-[18px] py-2.5 text-[13px] grid-cols-[1fr_auto_auto] <?= $i > 0 ? 'border-t border-gray-200' : '' ?>">
+                        <li class="grid items-baseline gap-y-2 gap-x-[18px] py-2.5 text-[13px] grid-cols-[1fr_auto_auto] <?= $i > 0 ? 'border-t border-gray-200' : '' ?>">
                             <span class="text-gray-900">
                                 <?php if ((string) ($item['name'] ?? '') !== ''): ?>
                                     <strong class="font-semibold"><?= $escaper->escapeHtml((string) $item['name']) ?></strong>
