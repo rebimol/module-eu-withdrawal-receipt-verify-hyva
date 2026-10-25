@@ -4,6 +4,7 @@
 - Fix: The verification page no longer says the receipt is cryptographically signed; it says the receipt matches its SHA-256 fingerprint.
 - Fix: Returned items on the receipt verification page show the product name next to the SKU.
 - Fix: Visitors who are not signed in get a "Continue Shopping" link on the verification page instead of "Back to my account".
+* Change: Requires EU Withdrawal Receipt Verification 1.0.4 or later, which provides the product names, the guest link and the texts of this page.
 
 ## 1.0.4
 
