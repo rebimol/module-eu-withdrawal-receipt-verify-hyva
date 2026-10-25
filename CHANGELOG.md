@@ -1,10 +1,9 @@
 ## 1.0.5
 
-- Fix: The note under the hash on the verification page now says what the check does: the store keeps the hash with the receipt and compares it with the receipt's content.
-- Fix: The verification page no longer says the receipt is cryptographically signed; it says the receipt matches its SHA-256 fingerprint.
-- Fix: Returned items on the receipt verification page show the product name next to the SKU.
-- Fix: Visitors who are not signed in get a "Continue Shopping" link on the verification page instead of "Back to my account".
-* Change: Requires EU Withdrawal Receipt Verification 1.0.4 or later, which provides the product names, the guest link and the texts of this page.
+- Fix: The verification page explains the hash check correctly and no longer calls the receipt cryptographically signed.
+- Fix: Returned items show the product name next to the SKU.
+- Fix: Guests get a "Continue Shopping" link instead of "Back to my account".
+* Change: Requires Receipt Verification 1.0.4.
 
 ## 1.0.4
 
