@@ -1,8 +1,8 @@
 ## 1.0.5
 
-- Fix: The verification page explains the hash check correctly and no longer calls the receipt cryptographically signed.
+- Fix: The verification page explains the hash check correctly and no longer calls the receipt signed.
 - Fix: Returned items show the product name next to the SKU.
-- Fix: Guests get a "Continue Shopping" link instead of "Back to my account".
+- Fix: Guests get "Continue Shopping" instead of "Back to my account".
 * Change: Requires Receipt Verification 1.0.4.
 
 ## 1.0.4
