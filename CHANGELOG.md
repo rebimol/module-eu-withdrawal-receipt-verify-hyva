@@ -1,3 +1,7 @@
+## 1.0.6
+
+- Fix: On a phone the verification page stacks the result banner and the receipt details, so the explanation no longer shrinks to one word per line next to the button.
+
 ## 1.0.5
 
 - Fix: The verification page explains the hash check correctly and no longer calls the receipt signed.

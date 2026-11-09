@@ -31,11 +31,11 @@ $items = $block->getItems();
     </header>
 
     <?php if ($ok): ?>
-        <div class="flex items-center gap-4 bg-slate-100 border border-slate-300 rounded-xl px-7 py-6 mb-4">
+        <div class="flex flex-col items-start gap-4 bg-slate-100 border border-slate-300 rounded-xl px-5 py-5 mb-4 sm:flex-row sm:items-center sm:px-7 sm:py-6">
             <div class="flex-shrink-0 w-14 h-14 rounded-full bg-emerald-600 text-white inline-flex items-center justify-center" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 8"/></svg>
             </div>
-            <div class="flex-1 min-w-0">
+            <div class="w-full flex-1 min-w-0">
                 <h2 class="text-[18px] font-bold mb-1 text-gray-900"><?= $escaper->escapeHtml(__('Receipt verified')) ?></h2>
                 <p class="text-[14px] leading-relaxed text-gray-900">
                     <?= $escaper->escapeHtml(__('This receipt matches its SHA-256 fingerprint, which shows it has not been changed since the merchant issued it.')) ?>
@@ -47,22 +47,22 @@ $items = $block->getItems();
             </a>
         </div>
 
-        <div class="bg-white border border-gray-200 rounded-xl px-[26px] py-[22px] mb-4">
+        <div class="bg-white border border-gray-200 rounded-xl px-5 py-[22px] mb-4 sm:px-[26px]">
             <h3 class="text-[14px] font-semibold text-gray-900 mb-3.5 pb-3 border-b border-gray-200">
                 <?= $escaper->escapeHtml(__('Receipt details')) ?>
             </h3>
-            <dl class="grid gap-y-2 gap-x-4 grid-cols-[minmax(180px,30%)_1fr]">
+            <dl class="grid grid-cols-1 gap-x-4 sm:gap-y-2 sm:grid-cols-[minmax(180px,30%)_1fr]">
                 <dt class="text-gray-500 text-[13px] m-0"><?= $escaper->escapeHtml(__('Receipt number')) ?></dt>
-                <dd class="text-gray-900 text-[13px] font-semibold m-0 text-right">RR<?= $escaper->escapeHtml($block->getIncrementIdDisplay()) ?></dd>
+                <dd class="text-gray-900 text-[13px] font-semibold m-0 max-sm:mb-2 break-words sm:text-right">RR<?= $escaper->escapeHtml($block->getIncrementIdDisplay()) ?></dd>
 
                 <?php if ($block->getOrderNumber() !== ''): ?>
                     <dt class="text-gray-500 text-[13px] m-0"><?= $escaper->escapeHtml(__('Order number')) ?></dt>
-                    <dd class="text-gray-900 text-[13px] font-semibold m-0 text-right">#<?= $escaper->escapeHtml($block->getOrderNumber()) ?></dd>
+                    <dd class="text-gray-900 text-[13px] font-semibold m-0 max-sm:mb-2 break-words sm:text-right">#<?= $escaper->escapeHtml($block->getOrderNumber()) ?></dd>
                 <?php endif; ?>
 
                 <?php if (method_exists($block, 'getCreatedAtFormatted') && $block->getCreatedAtFormatted() !== ''): ?>
                     <dt class="text-gray-500 text-[13px] m-0"><?= $escaper->escapeHtml(__('Submitted')) ?></dt>
-                    <dd class="text-gray-900 text-[13px] font-semibold m-0 text-right"><?= $escaper->escapeHtml($block->getCreatedAtFormatted()) ?></dd>
+                    <dd class="text-gray-900 text-[13px] font-semibold m-0 max-sm:mb-2 break-words sm:text-right"><?= $escaper->escapeHtml($block->getCreatedAtFormatted()) ?></dd>
                 <?php endif; ?>
 
                 <?php // Consumer name intentionally not rendered — GDPR Art. 5(1)(c) data
@@ -70,22 +70,22 @@ $items = $block->getItems();
                 ?>
 
                 <dt class="text-gray-500 text-[13px] m-0"><?= $escaper->escapeHtml(__('Refund total')) ?></dt>
-                <dd class="text-gray-900 text-[15px] font-bold m-0 text-right"><?= $escaper->escapeHtml($block->formatAmount($r['total'])) ?></dd>
+                <dd class="text-gray-900 text-[15px] font-bold m-0 max-sm:mb-2 break-words sm:text-right"><?= $escaper->escapeHtml($block->formatAmount($r['total'])) ?></dd>
 
                 <?php if ($block->getMerchantName() !== ''): ?>
                     <dt class="text-gray-500 text-[13px] m-0"><?= $escaper->escapeHtml(__('Merchant')) ?></dt>
-                    <dd class="text-gray-900 text-[13px] font-semibold m-0 text-right"><?= $escaper->escapeHtml($block->getMerchantName()) ?></dd>
+                    <dd class="text-gray-900 text-[13px] font-semibold m-0 max-sm:mb-2 break-words sm:text-right"><?= $escaper->escapeHtml($block->getMerchantName()) ?></dd>
                 <?php endif; ?>
 
                 <?php if ($block->getArticleRef() !== ''): ?>
                     <dt class="text-gray-500 text-[13px] m-0"><?= $escaper->escapeHtml(__('Legal basis')) ?></dt>
-                    <dd class="text-gray-900 text-[13px] font-semibold m-0 text-right"><?= $escaper->escapeHtml($block->getArticleRef()) ?></dd>
+                    <dd class="text-gray-900 text-[13px] font-semibold m-0 max-sm:mb-2 break-words sm:text-right"><?= $escaper->escapeHtml($block->getArticleRef()) ?></dd>
                 <?php endif; ?>
             </dl>
         </div>
 
         <?php if ($items !== []): ?>
-            <div class="bg-white border border-gray-200 rounded-xl px-[26px] py-[22px] mb-4">
+            <div class="bg-white border border-gray-200 rounded-xl px-5 py-[22px] mb-4 sm:px-[26px]">
                 <h3 class="text-[14px] font-semibold text-gray-900 mb-3.5 pb-3 border-b border-gray-200">
                     <?= $escaper->escapeHtml(__('Returned items')) ?>
                     <span class="text-gray-500 font-normal ml-1">(<?= (int) count($items) ?>)</span>
@@ -127,7 +127,7 @@ $items = $block->getItems();
             </div>
         <?php endif; ?>
 
-        <div class="bg-gray-50 border border-gray-200 rounded-xl px-[26px] py-[22px] mb-4">
+        <div class="bg-gray-50 border border-gray-200 rounded-xl px-5 py-[22px] mb-4 sm:px-[26px]">
             <div class="flex items-center justify-between gap-3 border-b border-gray-200 mb-3.5 pb-3">
                 <h3 class="text-[14px] font-semibold text-gray-900 m-0"><?= $escaper->escapeHtml(__('Integrity hash (SHA-256)')) ?></h3>
             </div>
@@ -137,11 +137,11 @@ $items = $block->getItems();
             </p>
         </div>
     <?php else: ?>
-        <div class="flex items-center gap-4 bg-red-50 border border-red-200 rounded-xl px-7 py-6 mb-4">
+        <div class="flex flex-col items-start gap-4 bg-red-50 border border-red-200 rounded-xl px-5 py-5 mb-4 sm:flex-row sm:items-center sm:px-7 sm:py-6">
             <div class="flex-shrink-0 w-14 h-14 rounded-full bg-red-600 text-white inline-flex items-center justify-center" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
             </div>
-            <div class="flex-1 min-w-0">
+            <div class="w-full flex-1 min-w-0">
                 <h2 class="text-[18px] font-bold mb-1 text-gray-900"><?= $escaper->escapeHtml(__('Verification failed')) ?></h2>
                 <p class="text-[14px] leading-relaxed text-gray-900">
                     <?= $escaper->escapeHtml(__('This link does not match a valid withdrawal receipt. The link may be incorrect, the receipt may have been revoked, or the verification request was rate-limited. If you copied the link from an email, please try again in a few minutes — or contact us if the problem persists.')) ?>
